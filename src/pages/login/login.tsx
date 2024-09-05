@@ -3,18 +3,16 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginPage(
-  // {setIsLogged}
-) {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleSubmit = () => {
     if (email && password) {
+      localStorage.setItem("user", "true");
       setEmail("");
-  // setIsLogged(true);
       setPassword("");
-      navigate("/profile");
+      navigate("/dashboard");
       alert("Login Successful");
     } else {
       alert("Please fill in all the fields");
@@ -103,13 +101,13 @@ export default function LoginPage(
           >
             Submit
           </Button>
-          <Typography 
-            variant="body2" 
+          <Typography
+            variant="body2"
             sx={{ marginTop: "16px", textAlign: "center" }}
           >
             Don’t have an account?
-            <Button 
-              onClick={() => navigate("/signup")} 
+            <Button
+              onClick={() => navigate("/auth/signup")}
               sx={{ textTransform: "none", padding: 0 }}
             >
               Sign Up

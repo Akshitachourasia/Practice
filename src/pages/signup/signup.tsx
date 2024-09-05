@@ -11,13 +11,17 @@ export default function SignUpPage() {
   const [contact, setContact] = useState("");
   const navigate = useNavigate();
   const handleSubmit = () => {
-      setFirstName("");
-      setLastName("");
+    if (firstName && lastName && email && password && contact) {
+      localStorage.setItem("user", "true");
       setEmail("");
       setPassword("");
       setContact("");
+      navigate("/auth/login");
+      alert("Sign Up Successful");
+    } else {
+      alert("Please fill in all the fields");
+    }
     console.log(firstName, lastName, email, password, contact);
-
   };
 
   return (
@@ -131,13 +135,13 @@ export default function SignUpPage() {
           >
             Submit
           </Button>
-          <Typography 
-            variant="body2" 
+          <Typography
+            variant="body2"
             sx={{ marginTop: "16px", textAlign: "center" }}
           >
             Already have an account?
-            <Button 
-              onClick={() => navigate("/login")} 
+            <Button
+              onClick={() => navigate("/auth/login")}
               sx={{ textTransform: "none", padding: 0 }}
             >
               Login
